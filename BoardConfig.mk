@@ -23,6 +23,7 @@ TARGET_RECOVERY_DEVICE_MODULES := init_xiaomi_pipa
 
 # Kernel
 TARGET_KERNEL_CONFIG += vendor/xiaomi/pipa.config
+BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
 
 # OTA assert
 TARGET_OTA_ASSERT_DEVICE := pipa
