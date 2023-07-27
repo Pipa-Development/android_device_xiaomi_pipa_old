@@ -22,8 +22,29 @@ TARGET_INIT_VENDOR_LIB := //$(DEVICE_PATH):init_xiaomi_pipa
 TARGET_RECOVERY_DEVICE_MODULES := init_xiaomi_pipa
 
 # Kernel
-TARGET_KERNEL_CONFIG += vendor/xiaomi/pipa.config
-BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
+BOARD_KERNEL_CMDLINE := \
+    androidboot.console=ttyMSM0 \
+    androidboot.hardware=qcom \
+    androidboot.init_fatal_reboot_target=recovery \
+    androidboot.memcg=1 \
+    androidboot.usbcontroller=a600000.dwc3 \
+    cgroup.memory=nokmem,nosocket \
+    console=ttyMSM0,115200n8 \
+    earlycon=msm_geni_serial,0xa90000 \
+    loop.max_part=7 \
+    lpm_levels.sleep_disabled=1 \
+    msm_rtb.filter=0x237 \
+    reboot=panic_warm \
+    service_locator.enable=1 \
+    swiotlb=2048
+
+BOARD_KERNEL_BASE := 0x00000000
+BOARD_KERNEL_PAGESIZE := 4096
+BOARD_RAMDISK_OFFSET := 0x01000000
+
+KERNEL_DEFCONFIG := vendor/pipa_user_defconfig
+
+KERNEL_LLVM_SUPPORT := true
 
 # OTA assert
 TARGET_OTA_ASSERT_DEVICE := pipa
